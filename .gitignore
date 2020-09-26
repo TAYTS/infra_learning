@@ -1,0 +1,18 @@
+# IDE
+.idea/
+.vscode/
+.settings/
+target/
+.classpath
+.project
+.settings
+*.iml
+
+# Vagrant
+.vagrant/
+
+# Maven
+.mvn/
+
+# OS files
+*.DS_Store
