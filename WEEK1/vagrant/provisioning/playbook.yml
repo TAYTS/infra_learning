@@ -1,0 +1,30 @@
+---
+- name: Install JRE 11
+  hosts: springboot
+  become: yes
+  tasks:
+    - name: Install JRE 11
+      apt:
+        name: default-jre
+
+- name: Start Springboot Application
+  hosts: springboot
+  remote_user: vagrant
+  become: yes
+  become_method: su
+  become_user: vagrant
+  tasks:
+    - name: Create app directory
+      file:
+        path: /home/vagrant/app
+        state: directory
+        mode: "0775"
+    - name: Copy Springboot JAR
+      copy:
+        src: /Users/taytzushieh/Courses/thoughtworks_learning/WEEK1/gs-spring-boot/initial/target/spring-boot-0.0.1-SNAPSHOT.jar
+        dest: /home/vagrant/app
+        owner: vagrant
+        group: vagrant
+        mode: "0775"
+    - name: Run Application
+      command: "java -jar /home/vagrant/app/spring-boot-0.0.1-SNAPSHOT.jar &"
