@@ -1,30 +1,50 @@
 ---
-- name: Install JRE 11
+- name: System setup
   hosts: springboot
   become: yes
   tasks:
     - name: Install JRE 11
       apt:
         name: default-jre
+    - name: Add user "helloapp"
+      user:
+        name: helloapp
+        shell: /bin/false
+        state: present
 
-- name: Start Springboot Application
+- name: Setup helloapp
   hosts: springboot
-  remote_user: vagrant
   become: yes
-  become_method: su
-  become_user: vagrant
   tasks:
     - name: Create app directory
       file:
-        path: /home/vagrant/app
+        path: /home/helloapp/app
         state: directory
-        mode: "0775"
-    - name: Copy Springboot JAR
+        owner: helloapp
+        group: helloapp
+        mode: 0700
+    - name: Copy helloapp JAR
       copy:
         src: /Users/taytzushieh/Courses/thoughtworks_learning/WEEK1/gs-spring-boot/initial/target/spring-boot-0.0.1-SNAPSHOT.jar
-        dest: /home/vagrant/app
-        owner: vagrant
-        group: vagrant
-        mode: "0775"
-    - name: Run Application
-      command: "java -jar /home/vagrant/app/spring-boot-0.0.1-SNAPSHOT.jar &"
+        dest: /home/helloapp/app
+        owner: helloapp
+        group: helloapp
+        mode: 0700
+
+- name: Running helloapp service
+  hosts: springboot
+  become: yes
+  tasks:
+    - name: Add helloapp systemd service config file
+      copy:
+        src: /Users/taytzushieh/Courses/thoughtworks_learning/WEEK1/vagrant/helloapp.service
+        dest: /etc/systemd/system
+        owner: root
+        group: root
+        mode: 0700
+    - name: Reload systemd deamon
+      command: systemctl daemon-reload
+    - name: Start helloapp service
+      command: systemctl start helloapp
+    - name: Enable helloapp service
+      command: systemctl enable helloapp
