@@ -12,7 +12,10 @@ target/
 .vagrant/
 
 # Maven
-.mvn/
+.mvn
+
+# Gradle
+.gradle
 
 # OS files
 *.DS_Store
