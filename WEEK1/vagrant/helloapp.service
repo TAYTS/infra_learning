@@ -1,0 +1,16 @@
+[Unit]
+Description=helloapp
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=helloapp
+Group=helloapp
+WorkingDirectory=/home/helloapp/app
+Type=simple
+ExecStart=/usr/bin/java -jar spring-boot-0.0.1-SNAPSHOT.jar
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
