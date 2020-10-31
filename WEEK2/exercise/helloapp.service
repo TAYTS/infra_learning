@@ -1,0 +1,16 @@
+[Unit]
+Description=helloapp
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=root
+User=root
+WorkingDirectory=/home/ubuntu
+Type=simple
+ExecStart=/usr/bin/java -jar app.jar
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
