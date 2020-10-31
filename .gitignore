@@ -25,3 +25,7 @@ target/
 
 # OS files
 *.DS_Store
+
+# Key files
+ssh_key/
+ssh_key
