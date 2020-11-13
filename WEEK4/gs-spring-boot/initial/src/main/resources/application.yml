@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+---
+
+spring:
+  profiles: "development"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,shutdown"
+  endpoint:
+    shutdown:
+      enabled: true
+    info:
+      enabled: false
+
+server:
+  port: 8080
+
+---
+
+spring:
+  profiles: "production"
+
+server:
+  port: 8080

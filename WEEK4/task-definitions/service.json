@@ -1,0 +1,15 @@
+[
+  {
+    "name": "spring-app",
+    "image": "593312435838.dkr.ecr.ap-southeast-1.amazonaws.com/learning:latest",
+    "memory": 512,
+    "cpu": 0,
+    "portMappings": [
+      {
+        "containerPort": 8081,
+        "hostPort": 80,
+        "protocol": "tcp"
+      }
+    ]
+  }
+]
