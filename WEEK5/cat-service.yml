@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: catapp
+  labels:
+    app: catapp
+  namespace: catapp
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30000
+      protocol: TCP
+  selector:
+    app: catapp

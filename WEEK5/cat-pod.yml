@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: catapp-pod
+  labels:
+    app: catapp
+  namespace: catapp
+spec:
+  template:
+    spec:
+      containers:
+        - name: catapp
+          image: janesee3/cat-application:1
+      restartPolicy: OnFailure
